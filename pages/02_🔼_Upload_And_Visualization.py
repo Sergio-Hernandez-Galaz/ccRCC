@@ -18,7 +18,7 @@ st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 sc.set_figure_params(dpi=300)
 
-@st.cache_data
+@st.cache_resource
 def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
