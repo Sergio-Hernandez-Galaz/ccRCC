@@ -76,12 +76,11 @@ if 'adata' not in st.session_state:
                     st.metric(label="Cells 🦠", value=f_adata.n_obs)
                 with col2:
                     st.metric(label="Genes 🧬", value=f_adata.n_vars)
-                st.divider()
-                st.subheader("Cell Types")
-                ct = sc.pl.umap(f_adata,color="cell_type",title="",return_fig=True)
-                st.pyplot(ct)
-
-                st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
+                # st.divider()
+                # st.subheader("Cell Types")
+                # ct = sc.pl.umap(f_adata,color="cell_type",title="",return_fig=True)
+                # st.pyplot(ct)
+                # st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
                 st.divider()
                 st.subheader("Selected Genes")
                 sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
@@ -96,10 +95,7 @@ if 'adata' not in st.session_state:
 else:
      with st.form("my_form"):
             options = st.sidebar.multiselect("Select Genes",st.session_state['adata'].var_names.tolist())
-            a = st.session_state['adata'].obs.columns.tolist()[0:14]
-            b = st.session_state['adata'].obs.columns.tolist()[-1]
-            a.append(b)
-            other_options = st.sidebar.multiselect("Visualize Observations", a)
+            other_options = st.sidebar.multiselect("Visualize Observations", st.session_state['adata'].obs.columns.tolist())
             submitted = st.form_submit_button("Run")
             if submitted:
                 col1, col2 = st.columns(2)
@@ -108,12 +104,12 @@ else:
                 with col2:
                     st.metric(label="Genes 🧬", value=st.session_state['adata'].n_vars)
                 st.divider()
-                st.subheader("Cell Types")
-                ct = sc.pl.umap(st.session_state['adata'],color="cell_type",title="",return_fig=True)
-                st.pyplot(ct)
+                # st.subheader("Cell Types")
+                # ct = sc.pl.umap(st.session_state['adata'],color="cell_type",title="",return_fig=True)
+                # st.pyplot(ct)
 
-                st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
-                st.divider()
+                # st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
+                # st.divider()
                 st.subheader("Selected Genes")
                 sg = sc.pl.umap(st.session_state['adata'],color=options,use_raw=False,cmap="Reds",return_fig=True)
                 st.pyplot(sg)
