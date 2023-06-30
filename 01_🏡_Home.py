@@ -1,22 +1,44 @@
+# Contents of ~/my_app/pages/page_3.py
 import streamlit as st
+import scanpy as sc
+import matplotlib.pyplot as plt
+import io
+import base64
+
+##############################################################################################################
+def image_to_button(image,name):
+            img = io.BytesIO()
+            image.savefig(img, format='png',dpi=300,bbox_inches='tight')
+            img.seek(0)
+            b64 = base64.b64encode(img.read()).decode()
+            htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
+            return htm
+
 st.set_page_config(layout="wide")
+st.set_option('deprecation.showPyplotGlobalUse', False)
+sc.set_figure_params(dpi=300)
+
+@st.cache_resource
+def upload_sc(adata):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return sc.read_h5ad(adata)
+##############################################################################################################
 
 
+f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
+if f_adata_upload is not None:
+    with st.form("my_form"):
+        f_adata = upload_sc(f_adata_upload)
+        options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
+        submitted = st.form_submit_button("Run")
+        if submitted:
+            st.subheader("Selected Genes")
+            sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
+            st.pyplot(sg)
+            st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
+            st.divider()
 
-st.header("Scanpy-Streamlit v0.1 📊")
-
-
-st.markdown("Implementation of a graphical user interface on the Streamlit platform for the analysis of single-cell transcript sequencing data. This first version incorporates the following features:")
-
-st.markdown("1. **Dataset Processing with h5ad Extension:** The GUI enables seamless processing of datasets in the h5ad format, ensuring compatibility with widely adopted data standards. This allows users to efficiently import and work with their single-cell transcriptomics data.")
-
-
-st.markdown("2. **Data Visualization:** The GUI offers powerful data visualization capabilities, providing users with intuitive and interactive visual representations of the transcript sequencing data. Various visualization techniques and interactive plots are implemented, enabling users to explore and interpret the data effectively.")
-
-st.markdown("3. **Transcription Factor Analysis:** Researchers can examine the activity of principal transcription factors within the dataset, exploring TF expression patterns and correlations. This analysis provides insights into regulatory networks and the role of TFs in orchestrating cellular processes.")
-
-
-# st.sidebar.markdown("# GUI for Scanpy 🏡")
+     
 
 
 
