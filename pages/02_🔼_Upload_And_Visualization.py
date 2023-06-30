@@ -82,11 +82,6 @@ if f_adata_upload is not None:
             st.pyplot(sg)
             st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
             st.divider()
-            st.subheader("Other Observations")
-            ob = sc.pl.umap(f_adata,color=other_options,cmap="magma",return_fig=True)
-            st.pyplot(ob)
-            st.markdown(image_to_button(ob,"other_observations.png"),unsafe_allow_html=True)
-            st.session_state['adata'] = f_adata
 
      
 
