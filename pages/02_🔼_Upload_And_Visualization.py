@@ -18,7 +18,7 @@ st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 sc.set_figure_params(dpi=300)
 
-@st.cache_resource
+@st.cache_data
 def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
@@ -62,63 +62,32 @@ st.markdown(css, unsafe_allow_html=True)
 st.markdown("# Upload ccRCC Dataset🫘")
 ##############################################################################################################
 
-if 'adata' not in st.session_state:
-    f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
-    if f_adata_upload is not None:
-        with st.form("my_form"):
-            f_adata = upload_sc(f_adata_upload)
-            options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
-            other_options = st.sidebar.multiselect("Visualize Observations", f_adata.obs.columns.tolist())
-            submitted = st.form_submit_button("Run")
-            if submitted:
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.metric(label="Cells 🦠", value=f_adata.n_obs)
-                with col2:
-                    st.metric(label="Genes 🧬", value=f_adata.n_vars)
-                # st.divider()
-                # st.subheader("Cell Types")
-                # ct = sc.pl.umap(f_adata,color="cell_type",title="",return_fig=True)
-                # st.pyplot(ct)
-                # st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
-                st.divider()
-                st.subheader("Selected Genes")
-                sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
-                st.pyplot(sg)
-                st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
-                st.divider()
-                st.subheader("Other Observations")
-                ob = sc.pl.umap(f_adata,color=other_options,cmap="magma",return_fig=True)
-                st.pyplot(ob)
-                st.markdown(image_to_button(ob,"other_observations.png"),unsafe_allow_html=True)
-                st.session_state['adata'] = f_adata
-else:
-     with st.form("my_form"):
-            options = st.sidebar.multiselect("Select Genes",st.session_state['adata'].var_names.tolist())
-            other_options = st.sidebar.multiselect("Visualize Observations", st.session_state['adata'].obs.columns.tolist())
-            submitted = st.form_submit_button("Run")
-            if submitted:
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.metric(label="Cells 🦠", value=st.session_state['adata'].n_obs)
-                with col2:
-                    st.metric(label="Genes 🧬", value=st.session_state['adata'].n_vars)
-                st.divider()
-                # st.subheader("Cell Types")
-                # ct = sc.pl.umap(st.session_state['adata'],color="cell_type",title="",return_fig=True)
-                # st.pyplot(ct)
 
-                # st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
-                # st.divider()
-                st.subheader("Selected Genes")
-                sg = sc.pl.umap(st.session_state['adata'],color=options,use_raw=False,cmap="Reds",return_fig=True)
-                st.pyplot(sg)
-                st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
-                st.divider()
-                st.subheader("Other Observations")
-                ob = sc.pl.umap(st.session_state['adata'],color=other_options,cmap="Reds",return_fig=True)
-                st.pyplot(ob)
-                st.markdown(image_to_button(ob,"other_observations.png"),unsafe_allow_html=True)
+f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
+if f_adata_upload is not None:
+    with st.form("my_form"):
+        f_adata = upload_sc(f_adata_upload)
+        options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
+        other_options = st.sidebar.multiselect("Visualize Observations", f_adata.obs.columns.tolist())
+        submitted = st.form_submit_button("Run")
+        if submitted:
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric(label="Cells 🦠", value=f_adata.n_obs)
+            with col2:
+                st.metric(label="Genes 🧬", value=f_adata.n_vars)
+            st.divider()
+            st.subheader("Selected Genes")
+            sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
+            st.pyplot(sg)
+            st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
+            st.divider()
+            st.subheader("Other Observations")
+            ob = sc.pl.umap(f_adata,color=other_options,cmap="magma",return_fig=True)
+            st.pyplot(ob)
+            st.markdown(image_to_button(ob,"other_observations.png"),unsafe_allow_html=True)
+            st.session_state['adata'] = f_adata
+
      
 
 
