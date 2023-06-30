@@ -67,10 +67,7 @@ if 'adata' not in st.session_state:
     if f_adata_upload is not None:
         with st.form("my_form"):
             f_adata = upload_sc(f_adata_upload)
-            #options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
-            a = f_adata.obs.columns.tolist()[0:14]
-            b = f_adata.obs.columns.tolist()[-1]
-            a.append(b)
+            options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
             other_options = st.sidebar.multiselect("Visualize Observations", f_adata.obs.columns.tolist())
             submitted = st.form_submit_button("Run")
             if submitted:
@@ -86,11 +83,11 @@ if 'adata' not in st.session_state:
 
                 st.markdown(image_to_button(ct,"cell_types.png"),unsafe_allow_html=True)
                 st.divider()
-             #   st.subheader("Selected Genes")
-             #   sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
-             #   st.pyplot(sg)
-             #   st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
-             #   st.divider()
+                st.subheader("Selected Genes")
+                sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
+                st.pyplot(sg)
+                st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
+                st.divider()
                 st.subheader("Other Observations")
                 ob = sc.pl.umap(f_adata,color=other_options,cmap="magma",return_fig=True)
                 st.pyplot(ob)
