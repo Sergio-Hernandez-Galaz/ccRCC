@@ -33,7 +33,7 @@ if f_adata_upload is not None:
         submitted = st.form_submit_button("Run")
         if submitted:
             st.subheader("Selected Genes")
-            sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="magma",return_fig=True)
+            sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap="Reds",return_fig=True)
             st.pyplot(sg)
             st.markdown(image_to_button(sg,"selected_genes.png"),unsafe_allow_html=True)
             st.divider()
