@@ -23,44 +23,6 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-st.markdown(
-    """
-<style>
-[data-testid="stMetricLabel"] {
-    font-size: 100px;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-<style>
-div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
-   overflow-wrap: break-word;
-   white-space: break-spaces;
-
-}
-div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div p {
-   font-size: 50% !important;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
-
-css = '''
-        <style>
-            .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-            font-size:1.5rem;
-            }
-        </style>
-        '''
-
-st.markdown(css, unsafe_allow_html=True)  
-st.markdown("# Upload ccRCC Dataset🫘")
-##############################################################################################################
 
 
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
