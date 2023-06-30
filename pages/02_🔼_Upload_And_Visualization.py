@@ -68,7 +68,6 @@ if f_adata_upload is not None:
     with st.form("my_form"):
         f_adata = upload_sc(f_adata_upload)
         options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
-        other_options = st.sidebar.multiselect("Visualize Observations", f_adata.obs.columns.tolist())
         submitted = st.form_submit_button("Run")
         if submitted:
             col1, col2 = st.columns(2)
