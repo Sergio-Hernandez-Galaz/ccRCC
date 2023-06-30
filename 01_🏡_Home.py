@@ -23,8 +23,8 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-
-st.sidebar.write("Created by Sergio Hernández 🧬")
+st.sidebar.write('## scRNA-vis Beta')
+st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
