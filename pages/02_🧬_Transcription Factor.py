@@ -28,7 +28,12 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-st.dataframe(df,use_container_width=True)
+cell_type_l = st.radio("Filter by Cell Type",set(df.cell_type.tolist()))
+if cell_type_l:
+    df_r = df[df.cell_type == cell_type_l]
+    st.dataframe(df_r,use_container_width=True)
+else:
+    st.dataframe(df,use_container_width=True)
 st.divider()
 top = st.sidebar.multiselect("Top Regulons",regulons_list)
 encoded_image_list = []
