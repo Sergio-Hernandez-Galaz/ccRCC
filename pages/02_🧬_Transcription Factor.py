@@ -37,8 +37,9 @@ if top:
             imagen = Image.open(io.BytesIO(imagen_bytes))
             st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
             img_list.append(imagen)
+            st.image(imagen,width=435)
             
-    st.image(img_list,width=435)
+    
    
 
      
