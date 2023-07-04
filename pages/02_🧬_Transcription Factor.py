@@ -60,7 +60,7 @@ if top:
             imagen = Image.open(io.BytesIO(imagen_bytes))
             encoded_image_list.append(encoded_image)
             img_list.append(imagen) 
-            st.image(imagen,width=420)
+            st.image(imagen)
             st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
 # st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True))
 # # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
