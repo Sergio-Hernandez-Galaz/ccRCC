@@ -9,9 +9,7 @@ from PIL import Image
 import pandas as pd
 
 ############################################################################################################
-df = pd.read_csv("todos.csv")
-
-
+df = pd.read_csv("todos.csv",usecols=["cell_type", "regulon","Z"])
 
 #############################################################################################################
 with open('regulons.pkl', 'rb') as f:
