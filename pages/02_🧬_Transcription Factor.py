@@ -28,7 +28,7 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-st.dataframe(df)
+st.dataframe(df,use_container_width=False)
 st.divider()
 top = st.sidebar.multiselect("Top Regulons",regulons_list)
 encoded_image_list = []
