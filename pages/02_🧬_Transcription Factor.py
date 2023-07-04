@@ -34,6 +34,17 @@ if cell_type_l:
     st.dataframe(df_r,use_container_width=True)
 else:
     st.dataframe(df,use_container_width=True)
+
+st.divider()
+display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"),horizontal=True)
+if display_umap_celltype == "No":
+     pass
+else:
+    with io.open(f"cell_types.png", 'rb') as archivo:
+        imagen_bytes = archivo.read()
+        encoded_image = base64.b64encode(imagen_bytes).decode('utf-8')
+        imagen = Image.open(io.BytesIO(imagen_bytes))
+        st.image(imagen,width=680)
 st.divider()
 top = st.sidebar.multiselect("Top Regulons",regulons_list)
 encoded_image_list = []
