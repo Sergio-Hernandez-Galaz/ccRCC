@@ -48,10 +48,12 @@ def upload_sc(adata):
 ##############################################################################################################
 st.write('## scRNA-vis')
 st.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
+display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"),horizontal=True)
+st.sidebar.divider()
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","rainbow","turbo","Spectral"),horizontal=True)
 st.sidebar.divider()
 saveas = st.sidebar.radio("Save as",("png","svg"),horizontal=True)
-display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"),horizontal=True)
+
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
