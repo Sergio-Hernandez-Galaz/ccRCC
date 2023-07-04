@@ -15,10 +15,10 @@ df = pd.read_csv("todos.csv",usecols=["cell_type", "regulon","Z"])
 with open('regulons.pkl', 'rb') as f:
     regulons_list = pickle.load(f)
 ##############################################################################################################
-def image_to_button(fig,name):
+def image_to_button(fig):
             buttons = []
-            for pic in fig:
-                 htm = f'<a href="data:file/txt;base64,{pic}" download="{name}"><input type="button" value="Download Image"></a>'
+            for pic,tops in zip(fig,top):
+                 htm = f'<a href="data:file/txt;base64,{pic}" download="{tops}"><input type="button" value="Download Image"></a>'
                  buttons.append(htm)
             return buttons
 
@@ -46,7 +46,7 @@ if top:
             img_list.append(imagen) 
             # st.image(imagen,width=420)
             # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
-st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image_list,f"regulon_{top}.png"),unsafe_allow_html=True))
+st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image_list),unsafe_allow_html=True))
 # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
     
    
