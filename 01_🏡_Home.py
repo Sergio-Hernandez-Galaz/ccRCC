@@ -25,6 +25,7 @@ def upload_sc(adata):
 ##############################################################################################################
 st.sidebar.write('## scRNA-vis Beta')
 st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
+st.divider()
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","rainbow","turbo","Spectral"),horizontal=True)
 saveas = st.sidebar.radio("Save as",("png","svg"),horizontal=True)
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
