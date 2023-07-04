@@ -38,7 +38,7 @@ if f_adata_upload is not None:
             sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap=colormap,return_fig=True)
             st.pyplot(sg)
             if saveas == "png":
-                  st.markdown(image_to_button(sg,f"{options}.pvg"),unsafe_allow_html=True)
+                  st.markdown(image_to_button(sg,f"{options}.png"),unsafe_allow_html=True)
             else: 
                   st.markdown(image_to_button(sg,f"{options}.svg"),unsafe_allow_html=True)
             st.divider()
