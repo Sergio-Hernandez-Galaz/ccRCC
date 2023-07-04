@@ -12,8 +12,7 @@ with open('regulons.pkl', 'rb') as f:
     regulons_list = pickle.load(f)
 ##############################################################################################################
 def image_to_button(image,name):
-            image.seek(0)
-            b64 = base64.b64encode(img.read()).decode()
+            b64 = base64.b64encode(image.read()).decode()
             htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
             return htm
 
