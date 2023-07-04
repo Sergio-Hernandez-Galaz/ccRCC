@@ -35,7 +35,7 @@ if top:
             imagen_bytes = archivo.read()
             encoded_image = base64.b64encode(imagen_bytes).decode('utf-8')
             imagen = Image.open(io.BytesIO(imagen_bytes))
-            st.markdown(image_to_button(encoded_image,"regulon_{i}.png"),unsafe_allow_html=True)
+            st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
             img_list.append(imagen)
             
     st.image(img_list,width=435)
