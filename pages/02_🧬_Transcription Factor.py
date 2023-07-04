@@ -24,8 +24,6 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-st.sidebar.write('## scRNA-vis Beta')
-st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
 
 top = st.sidebar.multiselect("Top Regulons",regulons_list)
 if top:
