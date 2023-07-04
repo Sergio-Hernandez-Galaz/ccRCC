@@ -15,12 +15,9 @@ df = pd.read_csv("todos.csv",usecols=["cell_type", "regulon","Z"])
 with open('regulons.pkl', 'rb') as f:
     regulons_list = pickle.load(f)
 ##############################################################################################################
-def image_to_button(fig):
-            buttons = []
-            for pic,tops in zip(fig,top):
-                 htm = f'<a href="data:file/txt;base64,{pic}" download="{tops}"><input type="button" value="Download Image"></a>'
-                 buttons.append(htm)
-            return buttons
+def image_to_button(fig,name):
+            htm = f'<a href="data:file/txt;base64,{fig}" download="{name}"><input type="button" value="Download Image"></a>'
+            return htm
 
 st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -44,10 +41,10 @@ if top:
             imagen = Image.open(io.BytesIO(imagen_bytes))
             encoded_image_list.append(encoded_image)
             img_list.append(imagen) 
-            # st.image(imagen,width=420)
-            # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
-st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image_list),unsafe_allow_html=True))
-# st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
+            st.image(imagen,width=420)
+            st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
+# st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True))
+# # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
     
    
 
