@@ -28,12 +28,6 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-cell_type_l = st.radio("Filter by Cell Type",set(df.cell_type.tolist()),horizontal=True)
-if cell_type_l:
-    df_r = df[df.cell_type == cell_type_l]
-    st.dataframe(df_r,use_container_width=True)
-else:
-    st.dataframe(df,use_container_width=True)
 
 st.divider()
 display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"),horizontal=True)
@@ -45,6 +39,15 @@ else:
         encoded_image = base64.b64encode(imagen_bytes).decode('utf-8')
         imagen = Image.open(io.BytesIO(imagen_bytes))
         st.image(imagen,width=680)
+st.divider()
+
+cell_type_l = st.radio("Filter by Cell Type",set(df.cell_type.tolist()),horizontal=True)
+if cell_type_l:
+    df_r = df[df.cell_type == cell_type_l]
+    st.dataframe(df_r,use_container_width=True)
+else:
+    st.dataframe(df,use_container_width=True)
+
 st.divider()
 top = st.sidebar.multiselect("Top Regulons",regulons_list)
 encoded_image_list = []
