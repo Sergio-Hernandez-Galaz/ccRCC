@@ -32,7 +32,7 @@ if top:
             imagen_bytes = archivo.read()
             encoded_image = base64.b64encode(imagen_bytes).decode('utf-8')
             imagen = Image.open(io.BytesIO(imagen_bytes))
-            st.image(imagen,width=435)
+            st.image(imagen,width=670)
             st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
     
    
