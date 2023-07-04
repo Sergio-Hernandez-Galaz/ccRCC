@@ -13,7 +13,7 @@ with open('regulons.pkl', 'rb') as f:
 ##############################################################################################################
 def image_to_button(fig,name):
             fig.seek(0)
-            b64 = base64.b64encode(fig.read()).decode()
+            b64 = base64.b64encode(fig).decode()
             htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
             return htm
 
