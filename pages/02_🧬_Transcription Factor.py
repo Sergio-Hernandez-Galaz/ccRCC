@@ -12,9 +12,7 @@ with open('regulons.pkl', 'rb') as f:
     regulons_list = pickle.load(f)
 ##############################################################################################################
 def image_to_button(image,name):
-            img = io.BytesIO()
-            image.savefig(img, format='png',dpi=300,bbox_inches='tight')
-            img.seek(0)
+            image.seek(0)
             b64 = base64.b64encode(img.read()).decode()
             htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
             return htm
@@ -39,7 +37,9 @@ if top:
             imagen_bytes = archivo.read()
             imagen = Image.open(io.BytesIO(imagen_bytes))
             img_list.append(imagen)
+            st.markdown(image_to_button(imagen,f"regulon_{i}.png"),unsafe_allow_html=True)
     st.image(img_list,width=435)
+   
 
      
 

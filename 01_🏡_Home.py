@@ -4,12 +4,7 @@ import scanpy as sc
 import matplotlib.pyplot as plt
 import io
 import base64
-import pickle 
-from PIL import Image
 
-#############################################################################################################
-with open('regulons.pkl', 'rb') as f:
-    regulons_list = pickle.load(f)
 ##############################################################################################################
 def image_to_button(image,name):
             img = io.BytesIO()
@@ -31,15 +26,6 @@ def upload_sc(adata):
 st.sidebar.write('## scRNA-vis Beta')
 st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","Wistia","Spectral"))
-top = st.sidebar.multiselect("Top Regulons",regulons_list)
-img_list = []
-if top:
-    for i in top:
-         with io.open(f"regulon_figs/Regulon({i}(+)).png", 'rb') as archivo:
-            imagen_bytes = archivo.read()
-            imagen = Image.open(io.BytesIO(imagen_bytes))
-            img_list.append(imagen)
-    st.image(img_list,width=435)
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
