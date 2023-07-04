@@ -36,8 +36,9 @@ if top:
          with io.open(f"regulon_figs/Regulon({i}(+)).png", 'rb') as archivo:
             imagen_bytes = archivo.read()
             imagen = Image.open(io.BytesIO(imagen_bytes))
-            img_list.append(imagen)
             st.markdown(image_to_button(imagen,"regulon_{i}.png"),unsafe_allow_html=True)
+            img_list.append(imagen)
+            
     st.image(img_list,width=435)
    
 
