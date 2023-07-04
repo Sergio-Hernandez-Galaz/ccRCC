@@ -8,7 +8,7 @@ import base64
 ##############################################################################################################
 def image_to_button(image,name):
             img = io.BytesIO()
-            image.savefig(img, format='png',dpi=300,bbox_inches='tight')
+            image.savefig(img, format='svg',dpi=300,bbox_inches='tight')
             img.seek(0)
             b64 = base64.b64encode(img.read()).decode()
             htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
@@ -36,7 +36,7 @@ if f_adata_upload is not None:
             st.subheader("Selected Genes")
             sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap=colormap,return_fig=True)
             st.pyplot(sg)
-            st.markdown(image_to_button(sg,f"{options}.png"),unsafe_allow_html=True)
+            st.markdown(image_to_button(sg,f"{options}.svg"),unsafe_allow_html=True)
             st.divider()
 
      
