@@ -16,8 +16,11 @@ with open('regulons.pkl', 'rb') as f:
     regulons_list = pickle.load(f)
 ##############################################################################################################
 def image_to_button(fig,name):
-            htm = f'<a href="data:file/txt;base64,{fig}" download="{name}"><input type="button" value="Download Image"></a>'
-            return htm
+            buttons = []
+            for pic in fig:
+                 htm = f'<a href="data:file/txt;base64,{pic}" download="{name}"><input type="button" value="Download Image"></a>'
+                 buttons.append(htm)
+            return buttons
 
 st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
