@@ -23,9 +23,8 @@ def upload_sc(adata):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return sc.read_h5ad(adata)
 ##############################################################################################################
-st.sidebar.write('## scRNA-vis Beta')
-st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
-st.sidebar.divider()
+st.write('## scRNA-vis Beta')
+st.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","rainbow","turbo","Spectral"),horizontal=True)
 st.sidebar.divider()
 saveas = st.sidebar.radio("Save as",("png","svg"),horizontal=True)
