@@ -51,6 +51,7 @@ st.write("Webapp for visualization of ccRCC single cell transcripts. Created by 
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","rainbow","turbo","Spectral"),horizontal=True)
 st.sidebar.divider()
 saveas = st.sidebar.radio("Save as",("png","svg"),horizontal=True)
+display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"),horizontal=True)
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
@@ -58,7 +59,7 @@ if f_adata_upload is not None:
         clustering = f_adata.obs["seurat_clusters"]   
         clustering = clustering.map(renaming_dict)
         f_adata.obs["cell_type"] = clustering 
-        display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"))
+
         options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
         submitted = st.form_submit_button("Run")
         if submitted:
