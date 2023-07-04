@@ -36,7 +36,7 @@ if f_adata_upload is not None:
             st.subheader("Selected Genes")
             sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap=colormap,return_fig=True)
             st.pyplot(sg)
-            st.markdown(image_to_button(sg,f"{options}".png"),unsafe_allow_html=True)
+            st.markdown(image_to_button(sg,f"{options}.png"),unsafe_allow_html=True)
             st.divider()
 
      
