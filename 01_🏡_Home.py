@@ -58,7 +58,7 @@ if f_adata_upload is not None:
         clustering = f_adata.obs["seurat_clusters"]   
         clustering = clustering.map(renaming_dict)
         f_adata.obs["cell_type"] = clustering 
-        display_umap_celltype = st.radio("Display Cell Type UMAP",("No","Yes"))
+        display_umap_celltype = st.sidebar.radio("Display Cell Type UMAP",("No","Yes"))
         options = st.sidebar.multiselect("Select Genes",f_adata.var_names.tolist())
         submitted = st.form_submit_button("Run")
         if submitted:
