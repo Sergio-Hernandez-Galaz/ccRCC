@@ -26,6 +26,7 @@ def upload_sc(adata):
 st.sidebar.write('## scRNA-vis Beta')
 st.sidebar.write("Webapp for visualization of ccRCC single cell transcripts. Created by **Sergio Hernández** 🧬")
 colormap= st.sidebar.radio("UMAP Colormap",("magma","Reds","hot","rainbow","turbo","Spectral"))
+saveas = st.sidebar.radio("Save as",("png","svg"))
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
@@ -36,7 +37,10 @@ if f_adata_upload is not None:
             st.subheader("Selected Genes")
             sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap=colormap,return_fig=True)
             st.pyplot(sg)
-            st.markdown(image_to_button(sg,f"{options}.svg"),unsafe_allow_html=True)
+            if saveas == "png":
+                  st.markdown(image_to_button(sg,f"{options}.pvg"),unsafe_allow_html=True)
+            else: 
+                  st.markdown(image_to_button(sg,f"{options}.svg"),unsafe_allow_html=True)
             st.divider()
 
      
