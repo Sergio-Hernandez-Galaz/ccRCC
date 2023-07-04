@@ -38,7 +38,7 @@ else:
         imagen_bytes = archivo.read()
         encoded_image = base64.b64encode(imagen_bytes).decode('utf-8')
         imagen = Image.open(io.BytesIO(imagen_bytes))
-        st.image(imagen,width=680)
+        st.image(imagen)
 st.divider()
 
 cell_type_l = st.radio("Filter by Cell Type",set(df.cell_type.tolist()),horizontal=True)
@@ -60,7 +60,7 @@ if top:
             imagen = Image.open(io.BytesIO(imagen_bytes))
             encoded_image_list.append(encoded_image)
             img_list.append(imagen) 
-            st.image(imagen)
+            st.image(imagen,width=420)
             st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
 # st.image(img_list,width=420,caption=st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True))
 # # st.markdown(image_to_button(encoded_image,f"regulon_{i}.png"),unsafe_allow_html=True)
