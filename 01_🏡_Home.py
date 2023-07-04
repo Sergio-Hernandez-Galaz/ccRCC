@@ -39,7 +39,7 @@ if top:
             imagen_bytes = archivo.read()
             imagen = Image.open(io.BytesIO(imagen_bytes))
             img_list.append(imagen)
-    st.image(img_list)
+    st.image(img_list,use_column_width=True, )
 f_adata_upload = st.file_uploader("Upload your Dataset",type="h5ad")
 if f_adata_upload is not None:
     with st.form("my_form"):
