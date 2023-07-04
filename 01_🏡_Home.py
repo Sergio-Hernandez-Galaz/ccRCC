@@ -6,9 +6,9 @@ import io
 import base64
 
 ##############################################################################################################
-def image_to_button(image,name):
+def image_to_button(image,name,format):
             img = io.BytesIO()
-            image.savefig(img, format='svg',dpi=300,bbox_inches='tight')
+            image.savefig(img, format=format,dpi=300,bbox_inches='tight')
             img.seek(0)
             b64 = base64.b64encode(img.read()).decode()
             htm = f'<a href="data:file/txt;base64,{b64}" download="{name}"><input type="button" value="Download Image"></a>'
@@ -38,9 +38,9 @@ if f_adata_upload is not None:
             sg = sc.pl.umap(f_adata,color=options,use_raw=False,cmap=colormap,return_fig=True)
             st.pyplot(sg)
             if saveas == "png":
-                  st.markdown(image_to_button(sg,f"{options}.png"),unsafe_allow_html=True)
+                  st.markdown(image_to_button(sg,f"{options}.png",saveas),unsafe_allow_html=True)
             else: 
-                  st.markdown(image_to_button(sg,f"{options}.svg"),unsafe_allow_html=True)
+                  st.markdown(image_to_button(sg,f"{options}.svg",saveas),unsafe_allow_html=True)
             st.divider()
 
      
